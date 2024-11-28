@@ -169,7 +169,7 @@ from PIL import Image
 from ultralytics import YOLO
 import joblib
 import catboost
-
+import random
 # Load your models
 try:
     model_16_features = joblib.load('16_catboost_model.pkl')
@@ -340,17 +340,23 @@ elif option == "Image Classification":
             pistachio_keywords = ["kirmizi", "siirt"]
 
             if file_extension.lower() in ["jpg", "jpeg", "png", "webp"] or any(keyword in file_name.lower() for keyword in pistachio_keywords):
-                # Open the uploaded image
+                # Load the uploaded image
                 image = Image.open(uploaded_file)
+                # Display the image
                 st.image(image, caption='Uploaded Image', use_column_width=True)
                 st.write("Results")
-
-                # Perform classification (replace this with actual model prediction logic)
-                # For demonstration, assigning random classes and confidence scores
-                pistachio_classes = ["Kirmizi_Pistachio", "Siirt_Pistachio"]
-                predicted_class_name = random.choice(pistachio_classes)
-                predicted_class_confidence = random.uniform(0.85, 1.0)  # High confidence for valid images
-
+                # Perform classification
+                results = image_model.predict(image)
+                # Get the predicted class probabilities
+                probs = results[0].probs  # Assuming results is a list and the first element contains the probabilities
+                predicted_class_index = probs.top1  # Index of the highest probability
+                predicted_class_confidence = probs.top1conf  # Confidence of the prediction
+                # Retrieve class names from the model's attribute
+                class_names = image_model.names
+                # Get the predicted class name
+                predicted_class_name = class_names[predicted_class_index]
+                
+                # Display the predicted class and confidence
                 st.write(f"Predicted class: {predicted_class_name}")
                 st.write(f"Confidence: {predicted_class_confidence:.2f}")
             else:
