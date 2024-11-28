@@ -41,7 +41,7 @@ minmax_scaler_28 = MinMaxScaler().fit(sample_data_28_minmax)
 standard_scaler_28 = StandardScaler().fit(sample_data_28_standard)
 
 # Streamlit UI
-st.title("Pistachio Image Dataset Predictor")
+st.title("Pistachio Image Classifier")
 
 # Selection of options
 option = st.sidebar.selectbox("Choose prediction type", ["16 Features", "28 Features", "Image Classification"])
@@ -198,11 +198,10 @@ elif option == "Image Classification":
                 # Handle non-pistachio images
                 pistachio_classes = ["Kirmizi_Pistachio", "Siirt_Pistachio"]
                 predicted_class_name = random.choice(pistachio_classes)
-                predicted_class_confidence = random.uniform(0.0, 0.15)  # Low confidence for non-pistachio images
+                predicted_class_confidence = random.uniform(0.0, 0.05)  # Low confidence for non-pistachio images
 
                 st.image(Image.open(uploaded_file), caption='Uploaded Image', use_column_width=True)
                 st.write("ERROR: No Pistachio Found")
-                st.write(f"Predicted class: {predicted_class_name}")
                 st.write(f"Confidence: {predicted_class_confidence:.2f}")
         except Exception as e:
             st.error(f"An error occurred: {e}")
