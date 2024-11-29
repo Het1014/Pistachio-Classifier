@@ -198,7 +198,7 @@ elif option == "Image Classification":
                 # Handle non-pistachio images
                 pistachio_classes = ["Kirmizi_Pistachio", "Siirt_Pistachio"]
                 predicted_class_name = random.choice(pistachio_classes)
-                predicted_class_confidence = random.uniform(0.0, 0.10)  # Low confidence for non-pistachio images
+                predicted_class_confidence = random.uniform(0.0, 0.09)  # Low confidence for non-pistachio images
 
                 st.image(Image.open(uploaded_file), caption='Uploaded Image', use_column_width=True)
                 st.write("ERROR: No Pistachio Found")
