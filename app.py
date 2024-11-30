@@ -41,7 +41,7 @@ minmax_scaler_28 = MinMaxScaler().fit(sample_data_28_minmax)
 standard_scaler_28 = StandardScaler().fit(sample_data_28_standard)
 
 # Streamlit UI
-st.title("Pistachio Image Classifier")
+st.title("Pistachio Classifier")
 
 # Selection of options
 option = st.sidebar.selectbox("Choose prediction type", ["16 Features", "28 Features", "Image Classification"])
@@ -103,7 +103,10 @@ if option == "28 Features":
             if st.button("Predict"):
                 try:
                     prediction_28 = model_28_features.predict(combined_inputs_28)
-                    st.write(f"Prediction: {prediction_28[0]}")
+                    if prediction_28[0] == 0:
+                        st.write("Prediction: Kirmizi_Pistachio")
+                    else:
+                        st.write("Prediction: Siirt_Pistachio")
                 except catboost.CatBoostError as e:
                     st.error(f"An error occurred during prediction: {e}")
                     st.write("Please check if the input features are correct and try again.")
@@ -154,7 +157,10 @@ elif option == "16 Features":
             if st.button("Predict"):
                 try:
                     prediction_16 = model_16_features.predict(combined_inputs_16)
-                    st.write(f"Prediction: {prediction_16[0]}")
+                    if prediction_16[0] == 0:
+                        st.write("Prediction: Kirmizi_Pistachio")
+                    else:
+                        st.write("Prediction: Siirt_Pistachio")
                 except catboost.CatBoostError as e:
                     st.error(f"An error occurred during prediction: {e}")
                     st.write("Please check if the input features are correct and try again.")
