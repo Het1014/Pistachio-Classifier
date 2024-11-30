@@ -105,7 +105,7 @@ if option == "28 Features":
                     prediction_28 = model_28_features.predict(combined_inputs_28)
                     if prediction_28[0] == 0:
                         st.write("Prediction: Kirmizi_Pistachio")
-                    else:
+                    if prediction_28[0] == 1:
                         st.write("Prediction: Siirt_Pistachio")
                 except catboost.CatBoostError as e:
                     st.error(f"An error occurred during prediction: {e}")
@@ -159,7 +159,7 @@ elif option == "16 Features":
                     prediction_16 = model_16_features.predict(combined_inputs_16)
                     if prediction_16[0] == 0:
                         st.write("Prediction: Kirmizi_Pistachio")
-                    else:
+                    if prediction_16[0] == 1:
                         st.write("Prediction: Siirt_Pistachio")
                 except catboost.CatBoostError as e:
                     st.error(f"An error occurred during prediction: {e}")
