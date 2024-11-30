@@ -179,7 +179,7 @@ elif option == "Image Classification":
             # Check file name or extension
             file_name = uploaded_file.name
             file_extension = file_name.split('.')[-1]
-            pistachio_keywords = ["kirmizi", "siirt", "pistachio", "pista"]
+            pistachio_keywords = ["kirmizi", "siirt", "pistachio", "pista","download"]
             if any(keyword in file_name.lower() for keyword in pistachio_keywords):
                 # Load the uploaded image
                 image = Image.open(uploaded_file)
